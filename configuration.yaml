@@ -1,0 +1,73 @@
+homeassistant:
+  name: Наша ДАЧА
+  latitude: !secret latitude_coord
+  longitude: !secret longitude_coord
+  elevation: 179
+  unit_system: metric
+  time_zone: Europe/Kiev
+  customize: !include customize.yaml # дать имена устройствам ???
+  packages: !include_dir_named packages # a way to bundle different component’s configuration together - https://www.home-assistant.io/docs/configuration/packages/
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+  javascript_version: latest
+# Enables configuration UI
+config:
+#https://home-assistant.io/components/logger/
+logger:
+  default: error
+  
+lovelace:
+  mode: yaml
+  
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+# настройка брокера MQTT
+mqtt:
+  broker: core-mosquitto
+  discovery: true
+  discovery_prefix: homeassistant  
+  username: mqtt
+  password: mqtt
+  
+
+# добавление в меню ссылки на редактор
+panel_iframe:
+  configurator:
+    title: Редактор С9
+    icon: mdi:square-edit-outline
+    url: http://192.168.1.50:8321
+    
+# подключение к роутеру
+device_tracker:
+  - platform: keenetic_ndms2
+    host: !secret ROUTER_IP
+    username: !secret ROUTER_USERNAME
+    password: !secret ROUTER_PASSWORD
+    interval_seconds: 10
+    consider_home: 180
+    new_device_defaults:
+      track_new_devices: true
+
+# integration to Xiaomi Gateway
+xiaomi_aqara:
+  discovery_retry: 10
+  gateways:
+    - mac: 7c:49:eb:1d:b9:e1
+      key: 31E3DA5118A849A3
+      host: 192.168.1.51

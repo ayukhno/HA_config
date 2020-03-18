@@ -1,0 +1,42 @@
+#######################
+# Ignore secrets.yaml #
+#######################
+secrets.yaml
+
+###############################
+# Ignore specific directories # 
+###############################
+tts
+deps
+android
+.storage
+
+#########################
+# Ignore specific files #
+#########################
+google_calendars.yaml
+known_devices.yaml
+.google.token
+.HA_VERSION
+.uuid
+gitupdate.sh
+OZW_Log.txt
+www/google15c705709483a249.html
+
+########################
+# Catch-all extensions #
+########################
+*.pid
+*.xml
+*.csr
+*.crt
+*.key
+*.conf
+*.pickle
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.db
+*.log
+*.cookies

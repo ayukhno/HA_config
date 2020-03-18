@@ -1,0 +1,15 @@
+title: Home Assistant - сервер
+views:
+  - title: Погода
+    icon: mdi:weather-partly-snowy-rainy
+    theme: dark-mode
+    cards:
+    
+      - type: vertical-stack
+        cards:
+        - type: markdown
+          content: >
+             **Погода** 
+
+        - type: weather-forecast
+          entity: weather.nasha_dacha 
